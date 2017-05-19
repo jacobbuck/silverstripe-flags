@@ -41,7 +41,7 @@ class Flag extends DataObject implements PermissionProvider {
 		$historyGridField = GridField::create(
 			'FlagHistory',
 			'History',
-			FlagHistory::get()->filter('Name', $this->Name)
+			FlagHistory::get()->filter('FlagID', $this->ID)
 		);
 
 		$fields->AddFieldToTab("Root.History", $historyGridField);
@@ -122,10 +122,9 @@ class Flag extends DataObject implements PermissionProvider {
 	public function onAfterWrite() {
 		parent::onAfterWrite();
 		$historyRecord = new FlagHistory();
-		$historyRecord->Name = $this->Name;
-		$historyRecord->Description = $this->Description;
 		$historyRecord->Enabled = $this->Enabled;
 		$historyRecord->AuthorID = Member::currentUserID();
+		$historyRecord->FlagID = $this->ID;
 		$historyRecord->write();
 	}
 

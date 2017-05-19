@@ -4,7 +4,6 @@ class FlagHistory extends DataObject {
 
 	private static $db = array(
 		'Name' => 'Varchar(255)',
-		'Description' => 'Text',
 		'Enabled' => 'Boolean',
 	);
 
@@ -12,6 +11,7 @@ class FlagHistory extends DataObject {
 
 	private static $has_one = array(
 		'Author' => 'Member'
+		'Flag' => 'Flag'
 	);
 
 	private static $searchable_fields = array(
