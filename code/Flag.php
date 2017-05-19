@@ -112,6 +112,7 @@ class Flag extends DataObject implements PermissionProvider {
 		}, $flagsConfig);
 
 		$flagsToDelete = Flag::get()->exclude('Name', $flagsConfigNames);
+
 		foreach ($flagsToDelete as $flag) {
 			$flag->delete();
 			DB::alteration_message("Flag '$flag->Name' deleted", 'deleted');
