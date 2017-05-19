@@ -4,13 +4,13 @@ class FlagHistory extends DataObject
 {
     private static $db = array(
         'Name' => 'Varchar(255)',
-        'Enabled' => 'Boolean',
+        'Enabled' => 'Boolean'
     );
 
     private static $default_sort = '"LastEdited" DESC';
 
     private static $has_one = array(
-        'Author' => 'Member'
+        'Author' => 'Member',
         'Flag' => 'Flag'
     );
 

@@ -114,7 +114,7 @@ class Flag extends DataObject implements PermissionProvider
             }
         }
 
-        $flagsConfigNames = array_map(function($flag) {
+        $flagsConfigNames = array_map(function ($flag) {
             return $flag['Name'];
         }, $flagsConfig);
 
