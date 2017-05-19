@@ -3,7 +3,7 @@
     "description": "Feature flag toggling for SilverStripe.",
     "license": "MIT",
     "type": "silverstripe-module",
-    "keywords": ["silverstripe", "flags"],
+    "keywords": ["feature", "features", "flag", "flags", "silverstripe", "switch", "toggle"],
     "authors": [
         {
             "name": "Jacob Buck",
