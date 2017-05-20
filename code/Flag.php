@@ -24,6 +24,29 @@ class Flag extends DataObject implements PermissionProvider
         'Enabled'
     );
 
+    public function canCreate($member = null)
+    {
+        return false;
+    }
+
+    public function canDelete($member = null)
+    {
+        return false;
+    }
+
+    public function canEdit($member = null)
+    {
+        return Permission::check('EDIT_FLAGS', 'any', $member);
+    }
+
+    public function canView($member = null)
+    {
+        return (
+            Permission::check('VIEW_FLAGS', 'any', $member) ||
+            Permission::check('EDIT_FLAGS', 'any', $member)
+        );
+    }
+
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -50,27 +73,14 @@ class Flag extends DataObject implements PermissionProvider
         return $fields;
     }
 
-    public function canView($member = null)
+    public function onAfterWrite()
     {
-        return (
-            Permission::check('VIEW_FLAGS', 'any', $member) ||
-            Permission::check('EDIT_FLAGS', 'any', $member)
-        );
-    }
-
-    public function canCreate($member = null)
-    {
-        return false;
-    }
-
-    public function canEdit($member = null)
-    {
-        return Permission::check('EDIT_FLAGS', 'any', $member);
-    }
-
-    public function canDelete($member = null)
-    {
-        return false;
+        parent::onAfterWrite();
+        $historyRecord = new FlagHistory();
+        $historyRecord->Enabled = $this->Enabled;
+        $historyRecord->AuthorID = Member::currentUserID();
+        $historyRecord->FlagID = $this->ID;
+        $historyRecord->write();
     }
 
     public function providePermissions()
@@ -124,16 +134,6 @@ class Flag extends DataObject implements PermissionProvider
             $flag->delete();
             DB::alteration_message("Flag '$flag->Name' deleted", 'deleted');
         }
-    }
-
-    public function onAfterWrite()
-    {
-        parent::onAfterWrite();
-        $historyRecord = new FlagHistory();
-        $historyRecord->Enabled = $this->Enabled;
-        $historyRecord->AuthorID = Member::currentUserID();
-        $historyRecord->FlagID = $this->ID;
-        $historyRecord->write();
     }
 
     public static function isEnabled($flagName)

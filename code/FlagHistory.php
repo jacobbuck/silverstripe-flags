@@ -25,15 +25,12 @@ class FlagHistory extends DataObject
         'Author.Name'
     );
 
-    public function canView($member = null)
+    public function canCreate($member = null)
     {
-        return (
-            Permission::check('VIEW_FLAGS', 'any', $member) ||
-            Permission::check('EDIT_FLAGS', 'any', $member)
-        );
+        return false;
     }
 
-    public function canCreate($member = null)
+    public function canDelete($member = null)
     {
         return false;
     }
@@ -43,8 +40,11 @@ class FlagHistory extends DataObject
         return false;
     }
 
-    public function canDelete($member = null)
+    public function canView($member = null)
     {
-        return false;
+        return (
+            Permission::check('VIEW_FLAGS', 'any', $member) ||
+            Permission::check('EDIT_FLAGS', 'any', $member)
+        );
     }
 }
