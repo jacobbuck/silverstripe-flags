@@ -3,13 +3,13 @@
   "description": "Feature flag toggling for SilverStripe.",
   "license": "MIT",
   "type": "silverstripe-module",
-  "homepage": "http://github.com/jacobbuck/silverstripe-flags",
+  "homepage": "https://github.com/jacobbuck/silverstripe-flags",
   "keywords": ["feature", "features", "flag", "flags", "silverstripe", "switch", "toggle"],
   "authors": [
     {"name": "Jacob Buck", "email": "buck.jacob@gmail.com"}
   ],
   "support": {
-    "issues": "http://github.com/jacobbuck/silverstripe-flags/issues"
+    "issues": "https://github.com/jacobbuck/silverstripe-flags/issues"
   },
   "require": {
     "silverstripe/framework": "~3.1"
