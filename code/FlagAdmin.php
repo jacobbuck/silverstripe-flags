@@ -6,7 +6,7 @@ class FlagAdmin extends ModelAdmin
         'Flag' => array('title' => 'Flags'),
     );
 
-    private static $menu_icon = 'flags/images/menu.svg';
+    private static $menu_icon = 'silverstripe-flags/images/menu.svg';
 
     private static $menu_title = 'Flags';
 
