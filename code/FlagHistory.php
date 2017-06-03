@@ -42,9 +42,6 @@ class FlagHistory extends DataObject
 
     public function canView($member = null)
     {
-        return (
-            Permission::check('VIEW_FLAGS', 'any', $member) ||
-            Permission::check('EDIT_FLAGS', 'any', $member)
-        );
+        return $this->Flag()->canView($member);
     }
 }
