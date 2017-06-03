@@ -109,11 +109,11 @@ class Flag extends DataObject implements PermissionProvider
 
             if (!$record) {
                 $alteration = 'created';
-                $record = new Flag();
-                $record->Name = $flag['Name'];
-                $record->Description = $flag['Description'];
-                $record->Enabled = $flag['Enabled'];
-            } elseif ($record->Description != $flag['Description']) {
+                $record = Flag::create($flag);
+            } elseif (
+                isset($flag['Description']) &&
+                $record->Description != $flag['Description']
+            ) {
                 $alteration = 'changed';
                 $record->Description = $flag['Description'];
             }
