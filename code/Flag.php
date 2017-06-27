@@ -41,10 +41,7 @@ class Flag extends DataObject implements PermissionProvider
 
     public function canView($member = null)
     {
-        return (
-            Permission::check('VIEW_FLAGS', 'any', $member) ||
-            Permission::check('EDIT_FLAGS', 'any', $member)
-        );
+        return true;
     }
 
     public function getCMSFields()
@@ -88,10 +85,6 @@ class Flag extends DataObject implements PermissionProvider
         return array(
             'EDIT_FLAGS' => array(
                 'name' => 'Modify Flags',
-                'category' => 'Flags'
-            ),
-            'VIEW_FLAGS' => array(
-                'name' => 'View Flags',
                 'category' => 'Flags'
             )
         );
