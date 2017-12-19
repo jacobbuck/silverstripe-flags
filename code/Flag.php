@@ -11,6 +11,11 @@ class Flag extends DataObject implements PermissionProvider
     );
 
     private static $default_sort = '"Name" ASC';
+    
+    private static $indexes = array(
+        'Name' => true,
+        'Enabled' => true,
+    );
 
     private static $searchable_fields = array(
         'Name',
@@ -103,8 +108,8 @@ class Flag extends DataObject implements PermissionProvider
             if (!$record) {
                 $alteration = 'created';
                 $record = Flag::create($flag);
-	    } elseif (isset($flag['Description'])
-		&& $record->Description != $flag['Description']
+            } elseif (isset($flag['Description']) 
+                && $record->Description != $flag['Description']
             ) {
                 $alteration = 'changed';
                 $record->Description = $flag['Description'];
@@ -116,11 +121,11 @@ class Flag extends DataObject implements PermissionProvider
             }
         }
 
-	$flagsConfigNames = array_map(
-	    function ($flag) {
-		return $flag['Name'];
-	    }, $flagsConfig
-	);
+        $flagsConfigNames = array_map(
+            function ($flag) {
+                return $flag['Name'];
+            }, $flagsConfig
+        );
 
         $flagsToDelete = Flag::get()->exclude('Name', $flagsConfigNames);
 
