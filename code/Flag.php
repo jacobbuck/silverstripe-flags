@@ -1,6 +1,6 @@
 <?php
 
-class Flag extends DataObject implements PermissionProvider
+class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvider
 {
     public static $flags = array();
 
@@ -133,6 +133,13 @@ class Flag extends DataObject implements PermissionProvider
             $flag->delete();
             DB::alteration_message("Flag '$flag->Name' deleted", 'deleted');
         }
+    }
+    
+    public static function get_template_global_variables()
+    {
+        return array(
+            'FlagIsEnabled' => 'isEnabled',
+        );
     }
 
     public static function isEnabled($flagName)
