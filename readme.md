@@ -18,7 +18,21 @@ Flag:
       Description: "Enables experimental thing."
 ```
 
-Then you can control your flags in admin:
+You can then write code to be conditional based on if a flag is enabled:
+
+```php
+    if (Flag::isEnabled('coolFeature')) {
+        // Do something cool
+    }
+```
+
+```html
+    <% if FlagEnabled("experimentalThing") %>
+        <%-- Experimental thing template --%>
+    <% end_if %>
+```
+
+Flags can be toggled in the CMS:
 
 ![screenshot](docs/images/screenshot1.png)
 
