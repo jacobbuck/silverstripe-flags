@@ -138,7 +138,7 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
     public static function get_template_global_variables()
     {
         return array(
-            'FlagIsEnabled' => 'isEnabled',
+            'FlagEnabled' => 'isEnabled',
         );
     }
 
