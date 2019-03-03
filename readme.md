@@ -27,7 +27,7 @@ You can then write code to be conditional based on if a flag is enabled:
 ```
 
 ```html
-    <% if FlagIsEnabled("experimentalThing") %>
+    <% if FlagEnabled("experimentalThing") %>
         <%-- Experimental thing template --%>
     <% end_if %>
 ```
