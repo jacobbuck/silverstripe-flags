@@ -2,7 +2,7 @@
   "name": "jacobbuck/silverstripe-flags",
   "description": "Feature flag toggling for SilverStripe.",
   "license": "MIT",
-  "type": "silverstripe-module",
+  "type": "silverstripe-vendormodule",
   "homepage": "https://github.com/jacobbuck/silverstripe-flags",
   "keywords": ["feature", "features", "flag", "flags", "silverstripe", "switch", "toggle"],
   "authors": [
