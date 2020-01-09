@@ -48,7 +48,7 @@ You can also see the history of changes to a flag:
 
 ## Requirements
 
-- Silverstripe 3+
+- Silverstripe 4+
 
 ## Installation
 
