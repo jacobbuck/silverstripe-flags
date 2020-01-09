@@ -22,7 +22,7 @@
     }
   },
   "extra": {
-    "installer-name": "silverstripe-flags",
+    "installer-name": "flags",
     "expose": [
       "images"
     ],
