@@ -12,7 +12,7 @@ class FlagAdmin extends ModelAdmin
         Flag::class => ['title' => 'Flags'],
     ];
 
-    private static $menu_icon = 'silverstripe-flags/images/menu.svg';
+    private static $menu_icon = 'jacobbuck/silverstripe-flags:images/menu.svg';
 
     private static $menu_title = 'Flags';
 
