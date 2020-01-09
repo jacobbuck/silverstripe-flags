@@ -7,7 +7,7 @@ Feature flag toggling for SilverStripe.
 Add your flags to your website or module config:
 
 ```yml
-Flag:
+JacobBuck\Flags\Flag:
   flags:
     - Name: coolFeature
       Description: "Enable website to use cool feature."
@@ -21,6 +21,10 @@ Flag:
 You can then write code to be conditional based on if a flag is enabled:
 
 ```php
+    use JacobBuck\Flags\Flag;
+    
+    ...
+    
     if (Flag::isEnabled('coolFeature')) {
         // Do something cool
     }

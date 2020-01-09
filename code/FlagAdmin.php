@@ -1,10 +1,16 @@
 <?php
 
+namespace JacobBuck\Flags;
+
+use SilverStripe\Admin\ModelAdmin;
+
 class FlagAdmin extends ModelAdmin
 {
-    private static $managed_models = array(
-        'Flag' => array('title' => 'Flags'),
-    );
+    private static $required_permission_codes = 'CMS_ACCESS_FlagAdmin';
+
+    private static $managed_models = [
+        Flag::class => ['title' => 'Flags'],
+    ];
 
     private static $menu_icon = 'silverstripe-flags/images/menu.svg';
 

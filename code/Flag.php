@@ -1,33 +1,45 @@
 <?php
 
+namespace JacobBuck\Flags;
+
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Permission;
+use SilverStripe\Security\PermissionProvider;
+use SilverStripe\View\TemplateGlobalProvider;
+
 class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvider
 {
-    public static $flags = array();
+    private static $table_name = 'Flag';
 
-    private static $db = array(
+    public static $flags = [];
+
+    private static $db = [
         'Name' => 'Varchar(255)',
         'Description' => 'Text',
-        'Enabled' => 'Boolean'
-    );
+        'Enabled' => 'Boolean',
+    ];
 
     private static $default_sort = '"Name" ASC';
     
-    private static $indexes = array(
+    private static $indexes = [
         'Name' => true,
         'Enabled' => true,
-    );
+    ];
 
-    private static $searchable_fields = array(
+    private static $searchable_fields = [
         'Name',
         'Description',
         'Enabled'
-    );
+    ];
 
-    private static $summary_fields = array(
+    private static $summary_fields = [
         'Name',
         'Description',
         'Enabled'
-    );
+    ];
 
     public function canCreate($member = null)
     {
@@ -63,14 +75,14 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
             $fields->dataFieldByName('Description')
                 ->performReadonlyTransformation()
         );
-
-        $historyGridField = GridField::create(
-            'FlagHistory',
-            'History',
-            FlagHistory::get()->filter('FlagID', $this->ID)
+        $fields->AddFieldToTab(
+            'Root.History',
+            GridField::create(
+                'FlagHistory',
+                'History',
+                FlagHistory::get()->filter('FlagID', $this->ID)
+            );
         );
-
-        $fields->AddFieldToTab("Root.History", $historyGridField);
 
         return $fields;
     }
@@ -78,6 +90,7 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
     public function onAfterWrite()
     {
         parent::onAfterWrite();
+
         $historyRecord = new FlagHistory();
         $historyRecord->Enabled = $this->Enabled;
         $historyRecord->AuthorID = Member::currentUserID();
@@ -87,12 +100,12 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
 
     public function providePermissions()
     {
-        return array(
-            'EDIT_FLAGS' => array(
+        return [
+            'EDIT_FLAGS' => [
                 'name' => 'Modify Flags',
-                'category' => 'Flags'
-            )
-        );
+                'category' => 'Flags',
+            ],
+        ];
     }
 
     public function requireDefaultRecords()
@@ -137,9 +150,9 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
     
     public static function get_template_global_variables()
     {
-        return array(
+        return [
             'FlagEnabled' => 'isEnabled',
-        );
+        ];
     }
 
     public static function isEnabled($flagName)

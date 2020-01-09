@@ -1,29 +1,36 @@
 <?php
 
+namespace JacobBuck\Flags;
+
+use SilverStripe\ORM\DataObject;
+use SilverStripe\Security\Member;
+
 class FlagHistory extends DataObject
 {
-    private static $db = array(
+    private static $table_name = 'FlagHistory';
+
+    private static $db = [
         'Name' => 'Varchar(255)',
-        'Enabled' => 'Boolean'
-    );
+        'Enabled' => 'Boolean',
+    ];
 
     private static $default_sort = '"LastEdited" DESC';
 
-    private static $has_one = array(
-        'Author' => 'Member',
-        'Flag' => 'Flag'
-    );
+    private static $has_one = [
+        'Author' => Member::class,
+        'Flag' => Flag::class,
+    ];
 
-    private static $searchable_fields = array(
-        'Enabled',
-        'LastEdited'
-    );
-
-    private static $summary_fields = array(
+    private static $searchable_fields = [
         'Enabled',
         'LastEdited',
-        'Author.Name'
-    );
+    ];
+
+    private static $summary_fields = [
+        'Enabled' => 'Enabled',
+        'LastEdited' => 'Last edited',
+        'Author.Name' => 'Author name',
+    ];
 
     public function canCreate($member = null)
     {

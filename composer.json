@@ -12,6 +12,6 @@
     "issues": "https://github.com/jacobbuck/silverstripe-flags/issues"
   },
   "require": {
-    "silverstripe/framework": "~3.1"
+    "silverstripe/recipe-cms": "^4"
   }
 }

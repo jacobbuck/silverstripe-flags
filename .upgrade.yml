@@ -1,0 +1,4 @@
+mappings:
+  Flag: JacobBuck\Flags\Flag
+  FlagAdmin: JacobBuck\Flags\FlagAdmin
+  FlagHistory: JacobBuck\Flags\FlagHistory

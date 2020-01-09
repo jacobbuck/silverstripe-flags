@@ -1,0 +1,6 @@
+---
+Name: silverstripe-flags
+---
+SilverStripe\ORM\DatabaseAdmin:
+  classname_value_remapping:
+    Flag: JacobBuck\Flags\Flag
