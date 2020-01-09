@@ -10,57 +10,103 @@ use SilverStripe\Security\Permission;
 use SilverStripe\Security\PermissionProvider;
 use SilverStripe\View\TemplateGlobalProvider;
 
+/**
+ * @package flags
+ */
 class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvider
 {
-    private static $table_name = 'Flag';
-
-    public static $flags = [];
-
+    /**
+     * @var array
+     */
     private static $db = [
         'Name' => 'Varchar(255)',
         'Description' => 'Text',
         'Enabled' => 'Boolean',
     ];
 
+    /**
+     * @var string
+     */
     private static $default_sort = '"Name" ASC';
-    
+
+    /**
+     * @config
+     *
+     * @var array
+     */
+    private static $flags = [];
+
+    /**
+     * @var array
+     */
     private static $indexes = [
         'Name' => true,
         'Enabled' => true,
     ];
 
+    /**
+     * @var array
+     */
     private static $searchable_fields = [
         'Name',
         'Description',
-        'Enabled'
+        'Enabled',
     ];
 
+    /**
+     * @var array
+     */
     private static $summary_fields = [
         'Name',
         'Description',
-        'Enabled'
+        'Enabled',
     ];
 
+    /**
+     * @var string
+     */
+    private static $table_name = 'Flag';
+
+    /**
+     * @param \SilverStripe\Security\Member $member
+     * @param array $context
+     * @return boolean
+     */
     public function canCreate($member = null, $context = [])
     {
         return false;
     }
 
+    /**
+     * @param \SilverStripe\Security\Member $member
+     * @return boolean
+     */
     public function canDelete($member = null)
     {
         return false;
     }
 
+    /**
+     * @param \SilverStripe\Security\Member $member
+     * @return boolean
+     */
     public function canEdit($member = null)
     {
         return Permission::check('EDIT_FLAGS', 'any', $member);
     }
 
+    /**
+     * @param \SilverStripe\Security\Member $member
+     * @return boolean
+     */
     public function canView($member = null)
     {
         return true;
     }
 
+    /**
+     * @return \SilverStripe\Forms\FieldList
+     */
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
@@ -70,11 +116,13 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
             $fields->dataFieldByName('Name')
                 ->performReadonlyTransformation()
         );
+
         $fields->replaceField(
             'Description',
             $fields->dataFieldByName('Description')
                 ->performReadonlyTransformation()
         );
+
         $fields->AddFieldToTab(
             'Root.History',
             GridField::create(
@@ -87,6 +135,9 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
         return $fields;
     }
 
+    /**
+     * @return void
+     */
     public function onAfterWrite()
     {
         parent::onAfterWrite();
@@ -98,6 +149,9 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
         $historyRecord->write();
     }
 
+    /**
+     * @return array
+     */
     public function providePermissions()
     {
         return [
@@ -108,6 +162,9 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
         ];
     }
 
+    /**
+     * @return void
+     */
     public function requireDefaultRecords()
     {
         parent::requireDefaultRecords();
@@ -147,7 +204,10 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
             DB::alteration_message("Flag '$flag->Name' deleted", 'deleted');
         }
     }
-    
+
+    /**
+     * @return array
+     */
     public static function get_template_global_variables()
     {
         return [
@@ -155,6 +215,10 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
         ];
     }
 
+    /**
+     * @param string $flagName
+     * @return boolean
+     */
     public static function isEnabled($flagName)
     {
         $flag = Flag::get()->find('Name', $flagName);
