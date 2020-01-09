@@ -18,5 +18,16 @@
     "psr-4:": {
       "JacobBuck\\Flags\\": "src/"
     }
+  },
+  "extra": {
+    "installer-name": "silverstripe-flags",
+    "expose": [
+      "images"
+    ],
+    "screenshots": [
+      "docs/images/screenshot1.png",
+      "docs/images/screenshot2.png",
+      "docs/images/screenshot3.png"
+    ]
   }
 }
