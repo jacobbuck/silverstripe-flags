@@ -41,7 +41,7 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
         'Enabled'
     ];
 
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return false;
     }
@@ -81,7 +81,7 @@ class Flag extends DataObject implements PermissionProvider, TemplateGlobalProvi
                 'FlagHistory',
                 'History',
                 FlagHistory::get()->filter('FlagID', $this->ID)
-            );
+            )
         );
 
         return $fields;

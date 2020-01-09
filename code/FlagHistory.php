@@ -32,7 +32,7 @@ class FlagHistory extends DataObject
         'Author.Name' => 'Author name',
     ];
 
-    public function canCreate($member = null)
+    public function canCreate($member = null, $context = [])
     {
         return false;
     }
