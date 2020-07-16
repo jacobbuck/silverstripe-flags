@@ -14,7 +14,6 @@ class FlagHistory extends DataObject
      * @var array
      */
     private static $db = [
-        'Name' => 'Varchar(255)',
         'Enabled' => 'Boolean',
     ];
 
