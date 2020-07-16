@@ -35,4 +35,9 @@ class FlagAdmin extends ModelAdmin
      * @var string
      */
     private static $url_segment = 'flags';
+    
+    /**
+     * @var boolean
+     */
+    public $showImportForm = false;
 }
